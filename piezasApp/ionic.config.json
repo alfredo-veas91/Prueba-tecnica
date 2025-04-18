@@ -1,0 +1,7 @@
+{
+  "name": "piezasApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
