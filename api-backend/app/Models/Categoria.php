@@ -9,4 +9,9 @@ class Categoria extends Model
     protected $fillable = [
         'nombre',
     ];
+
+    public function piezas()
+    {
+        return $this->hasMany(Pieza::class);
+    }
 }
