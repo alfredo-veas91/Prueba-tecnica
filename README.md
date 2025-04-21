@@ -2,4 +2,4 @@
 
 Alfredo veas
 
-Consiste en una api-backend desarrollado en Laravel 11 con una base de datos sqlLite y un frontend desarrollado en Ionic 
+Consiste en una api-backend desarrollado en Laravel 11 con una base de datos sqlLite y un frontend desarrollado en Ionic 7.2.1

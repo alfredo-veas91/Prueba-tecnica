@@ -1,0 +1,42 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-b-[#2D2A70, #803683, #C23F86] p-4">
+  <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-extrabold font-inter mb-6 text-center text-gray-900">Login</h1>
+    <div>
+      <label for="registro" class="font-medium-14 textlink text-gray-700">
+        ¿no tienes una cuenta?
+      </label>
+      <label for="registro" class="font-medium-14 textlink text-gray-700">
+        registrarme
+      </label>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!loginForm.valid"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+      >
+        Ingresar
+      </button>
+    </form>
+  </div>
+</div>
