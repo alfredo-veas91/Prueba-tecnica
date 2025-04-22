@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs'; 
+import { Observable ,Subject } from 'rxjs'; 
 import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
@@ -9,6 +9,10 @@ export class ApiService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
+
+  private categoriaActualizada = new Subject<void>();
+  categoriaActualizada$ = this.categoriaActualizada.asObservable();
+
 
   register(userData: any) {
     return this.http.post(`${this.apiUrl}/register`, {
@@ -39,28 +43,35 @@ export class ApiService {
     });
   }
 
-  createCategory(name: string): Observable<any> {
+  createCategory(data: { nombre: string }): Observable<any> {
     const token = localStorage.getItem('auth_token');
-    return this.http.post(`${this.apiUrl}/categorias`, 
-      { name },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+    return this.http.post(`${this.apiUrl}/categorias`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).pipe(
+      tap(() => {
+        this.categoriaActualizada.next();
+      })
+    );
   }
   
 
-  updateCategory(id: number, name: string): Observable<any> {
+  updateCategory(data: { id: number, nombre: string }): Observable<any> {
     const token = localStorage.getItem('auth_token');
-    return this.http.put(`${this.apiUrl}/categorias/${id}`, 
-      { name },
+    return this.http.put(`${this.apiUrl}/categorias/${data.id}`, 
+      data,  
       {
         headers: {
-          Authorization: `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
         }
-      });
-  }  
+      }
+    ).pipe(
+      tap(() => {
+        this.categoriaActualizada.next();  
+      })
+    );
+  }
 
   deleteCategory(id: number): Observable<any> {
     const token = localStorage.getItem('auth_token');

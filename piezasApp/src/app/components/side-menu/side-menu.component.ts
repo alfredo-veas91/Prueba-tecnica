@@ -24,6 +24,8 @@ export class SideMenuComponent {
     });
   }
 
+  
+  
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {

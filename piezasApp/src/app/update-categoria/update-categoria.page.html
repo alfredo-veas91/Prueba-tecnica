@@ -1,0 +1,41 @@
+<div class="min-h-screen bg-white flex flex-col">
+  <!-- Header con título y flecha -->
+  <header class="sticky top-0 z-10 bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/categorias">
+        <img src="assets/icon/arrow-narrow-left.svg" alt="volver" class="w-6 h-6 cursor-pointer">
+      </a>
+      <h6 class="text-xl !font-extrabold !text-black">Editar categoría</h6>
+      <div class="w-6"></div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <div *ngIf="isLoading" class="flex-1 flex items-center justify-center">
+    <p class="text-gray-500">Cargando...</p>
+  </div>
+
+  <main *ngIf="!isLoading" class="flex-1 p-4">
+    <!-- Formulario -->
+    <div class="mb-6">
+      <label class="block text-sm font-medium mb-2 !text-black">Nombre de la categoría</label>
+      <input
+        type="text"
+        [(ngModel)]="categoryName"
+        [placeholder]="currentCategoryName"
+        maxlength="50"
+        class="w-full border border-gray-300 rounded-xl p-3 text-base !text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      />
+    </div>
+  </main>
+  
+  <!-- Botón para actualizar -->
+  <div class="p-4 bg-white border-t border-gray-200 mt-auto">
+    <button
+      class="w-full bg-[#803683] text-white !py-4 !rounded font-semibold hover:opacity-90 transition"
+      (click)="updateCategory()"
+    >
+      Actualizar
+    </button>
+  </div>
+</div>

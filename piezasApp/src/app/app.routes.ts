@@ -26,4 +26,12 @@ export const routes: Routes = [
     path: 'categorias',
     loadComponent: () => import('./categorias/categorias.page').then( m => m.CategoriasPage)
   },
+  {
+    path: 'create-categoria',
+    loadComponent: () => import('./create-categoria/create-categoria.page').then( m => m.CreateCategoriaPage)
+  },
+  {
+    path: 'update-categoria/:id',
+    loadComponent: () => import('./update-categoria/update-categoria.page').then( m => m.UpdateCategoriaPage)
+  },
 ];
