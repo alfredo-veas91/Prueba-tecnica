@@ -14,7 +14,10 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed', // Mínimo 8 caracteres
+            'password' => 'required|string|min:8', // Mínimo 8 caracteres
+            'fecha_nacimiento' => 'nullable|date',
+            'telefono_codigo' => 'nullable|string',
+            'telefono_numero' => 'nullable|string',
         ]);
 
         // Hasheo con Bcrypt + Pepper
@@ -28,6 +31,9 @@ class AuthController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $hashedPassword,
+            'fecha_nacimiento' => $validated['fecha_nacimiento'] ?? null,
+            'telefono_codigo' => $validated['telefono_codigo'] ?? null, 
+            'telefono_numero' => $validated['telefono_numero'] ?? null,
         ]);
 
         $token = Auth::login($user);

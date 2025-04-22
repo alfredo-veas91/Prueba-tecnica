@@ -1,42 +1,80 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-b-[#2D2A70, #803683, #C23F86] p-4">
-  <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-    <h1 class="text-2xl font-extrabold font-inter mb-6 text-center text-gray-900">Login</h1>
-    <div>
-      <label for="registro" class="font-medium-14 textlink text-gray-700">
-        ¿no tienes una cuenta?
-      </label>
-      <label for="registro" class="font-medium-14 textlink text-gray-700">
-        registrarme
-      </label>
+<!-- Contenedor principal con fondo y centrado -->
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#2D2A70] via-[#803683] to-[#C23F86] p-4 relative">
+  
+  <div class="relative w-full max-w-md flex flex-col items-center">
+
+    <!-- Header-->
+    <header class="absolute -top-10 w-full7 flex justify-center z-10">
+      <img src="assets/icon/Group 1.svg" alt="Neering" class="w-24 h-auto md:w-126" />
+    </header>
+
+    <!-- Contenedor blanco-->
+    <div class="bg-white p-8 rounded-2xl shadow-md w-full z-0">
+      <h1 class="text-3xl !font-extrabold !font-inter mb-6 text-center text-gray-900">Login</h1>
+
+      <p class="text-sm text-gray-600 mb-4 text-center">
+        ¿No tienes una cuenta?
+        <a href="/registro" class="!text-[#803683] font-semibold hover:underline">Registrarme</a>
+      </p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <!-- Correo -->
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-black">Correo electrónico</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="mt-1 block w-full rounded-md border border-gray-300 !text-black p-2"
+            placeholder="usuario@neering.cl"
+          />
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <div class="relative">
+            <input
+              id="password"
+              [attr.type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              class="mt-1 block w-full rounded-md border border-gray-300 !text-black p-2"
+            />
+            <img
+              src="assets/icon/Vector.svg"
+              alt="Mostrar contraseña"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer transition duration-200"
+              [ngClass]="{ 'opacity-100': showPassword, 'opacity-40': !showPassword }"
+              (click)="togglePasswordVisibility()"
+            />
+          </div>
+        </div>
+
+        <div class="text-right">
+          <a href="#" class="text-xs !text-[#803683] hover:underline">¿Has olvidado tu contraseña?</a>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-[#803683] text-white !py-4 text-lg !rounded font-semibold hover:opacity-90 transition">
+          Log In
+        </button>
+
+
+        <div class="my-4 text-gray-400 text-sm text-center">o</div>
+
+        <button
+          class="flex items-center justify-center w-full !border-2 !border-gray-300 !rounded !py-4 !hover:bg-gray-50 transition">
+          <img src="assets/icon/google.svg" alt="Google" class="w-5 h-5 mr-2" />
+          <span class="text-sm font-medium text-gray-700">Continuar con Google</span>
+        </button>
+
+      </form>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
-          class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
 
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-        <input
-          id="password"
-          type="password"
-          formControlName="password"
-          class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+    <!-- Footer-->
+    <footer class="absolute -bottom-10 w-full flex justify-center z-10">
+      <img src="assets/icon/Capa_1.svg" alt="Neering" class="w-30 h-auto md:w-32" />
+    </footer>
 
-      <button
-        type="submit"
-        [disabled]="!loginForm.valid"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
-      >
-        Ingresar
-      </button>
-    </form>
   </div>
 </div>

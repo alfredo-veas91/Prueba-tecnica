@@ -1,0 +1,100 @@
+<div class="min-h-screen bg-white relative">
+  <!-- Header con botón + -->
+  <header class="sticky top-0 z-10 bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Menu desplegable-->
+      <button class="text-gray-800 focus:outline-none" (click)="toggleMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <h1 class="text-xl font-inter text-gray-900">Categorias</h1>     
+      <!--Boton agregar categoria-->
+      <button 
+        class="text-black focus:outline-none"
+        (click)="openCreateModal()"
+        aria-label="Agregar categoría"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- Buscador -->
+    <div class="relative w-full mb-6">
+      <input 
+        type="text" 
+        class="block w-full rounded-full border !border-[#AF48FF] !text-black py-2 pl-10 pr-4" 
+        placeholder="Busqueda"
+      >    
+      <svg 
+        class="absolute left-3 top-1/2 transform -translate-y-1/2 scale-x-[-1] h-5 w-5 text-[#AF48FF]" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+    </div>
+
+    <!-- Listado de categorías -->
+    <div class="mb-4">
+      <h3 class="text-xs font-extrabold text-gray-900 mb-3">Listado de categorias</h3>
+      
+      <div *ngIf="categories.length === 0" class="text-center py-4 text-gray-500">
+        No hay categorías disponibles
+      </div>
+
+      <ul class="space-y-2">
+        <li *ngFor="let category of categories" 
+            class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+          <span class="font-medium !text-black">{{ category.nombre }}</span>
+          <div class="flex gap-2">
+            <button class="text-[#AF48FF] hover:text-purple-700">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+              </svg>
+            </button>
+            <button class="text-red-500 hover:text-red-700">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+            </button>
+          </div>
+        </li>
+      </ul>
+      <pre class="text-black bg-white p-4">{{ categories | json }}</pre>
+
+
+    </div>
+  </main>
+
+  <!-- Modal para crear categoría -->
+  <div *ngIf="showCreateModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+      <h2 class="text-lg !font-bold mb-4">Crear nueva categoría</h2>
+      <input 
+        type="text" 
+        [(ngModel)]="newCategoryName"
+        class="w-full p-2 border rounded mb-4" 
+        placeholder="Nombre de la categoría"
+      >
+      <div class="flex justify-end gap-2">
+        <button (click)="showCreateModal = false" class="px-4 py-2 !text-gray-600 hover:text-gray-800">
+          Cancelar
+        </button>
+        <button (click)="createCategory()" class="px-4 py-2 bg-[#AF48FF] !text-white rounded hover:bg-purple-700">
+          Crear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Componente del menú desplegable -->
+  <app-side-menu></app-side-menu>
+</div>

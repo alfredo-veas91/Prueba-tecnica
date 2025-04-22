@@ -1,0 +1,145 @@
+<!-- Menú desplegable lateral -->
+<div 
+*ngIf="isMenuOpen" 
+class="fixed inset-0 z-20 bg-black bg-opacity-50"
+(click)="toggleMenu()"
+></div>
+
+<aside 
+*ngIf="isMenuOpen"
+class="fixed left-0 top-0 z-30 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out"
+>
+<div class="relative h-40 w-full" style="margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;">
+  <!-- Encabezado del menú -->
+  <div class="relative h-40 w-full" style="margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;">
+    <!-- Gradiente que ahora sí ocupará TODO el ancho sin espacios -->
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500" 
+    style="left: 0; right: 0; width: 100%;"></div>
+    
+    <!-- Imagen ajustada -->
+    <div class="absolute inset-0 flex items-center justify-center pr-4 overflow-hidden">
+      <img 
+        src="assets/icon/testimonials-5 1.png" 
+        alt=""
+        class="max-w-md/4 object-contain" 
+      />
+    </div>
+    
+    <!-- Contenido del encabezado -->
+    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+      <!-- Obtencion del nombre de usuario -->
+    </div>
+  </div>
+
+  <!-- Navegación -->
+  <nav class="flex-1">
+    <ul class="space-y-2">
+      <li>
+        <a 
+          href="/home-page" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+          <img src="assets/icon/menuIcons/Home Page.svg" alt="inicio" class="w-5 h-5 mr-3 text-gray-500">
+          Inicio
+        </a>
+      </li>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+          <img src="assets/icon/menuIcons/Search.svg" alt="Productos" class="w-5 h-5 mr-3 text-gray-500">
+
+          Productos
+        </a>
+      </li>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Notification.svg" alt="Notificaciones" class="w-5 h-5 mr-3 text-gray-500">
+          Notificaciones
+        </a>            
+      </li>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Heart Outline.svg" alt="Favoritos" class="w-5 h-5 mr-3 text-gray-500">
+          Favoritos
+        </a>            
+      </li>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Price.svg" alt="Ofertas" class="w-5 h-5 mr-3 text-gray-500">
+          Ofertas
+        </a>            
+      </li>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Account.svg" alt="Cuenta" class="w-5 h-5 mr-3 text-gray-500">
+          Mi cuenta
+        </a>            
+      </li>
+    </ul>
+    <div class="border-t-3 border-[#D9C8C8] my-3 justify-end"></div>      
+    <ul>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Sell Stock.svg" alt="Vender" class="w-5 h-5 mr-3 text-gray-500">
+          Vender
+        </a>            
+      </li>
+      <li>
+        <a 
+          href="/categorias" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Sorting.svg" alt="Categorias" class="w-5 h-5 mr-3 text-gray-500">
+          Categorias
+        </a>            
+      </li>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Shop.svg" alt="Tiendas" class="w-5 h-5 mr-3 text-gray-500">
+          Tiendas oficiales
+        </a>            
+      </li>
+      <li>
+        <a 
+          href="#" 
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
+          routerLinkActive="bg-gray-100 font-medium"
+        >
+        <img src="assets/icon/menuIcons/Help.svg" alt="Tiendas" class="w-5 h-5 mr-3 text-gray-500">
+          Ayuda
+        </a>            
+      </li>
+    </ul>
+  </nav>
+  
+</div>
+</aside>
