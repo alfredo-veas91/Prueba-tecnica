@@ -9,51 +9,48 @@ class PiezaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Pieza::with('categoria');
-    
-        // Filtro por nombre
-        if ($request->filled('nombre')) {
-            $query->where('nombre', 'like', '%' . $request->nombre . '%');
-        }
-    
-        // Filtro por categoría
-        if ($request->filled('categoria_id')) {
-            $query->where('categoria_id', $request->categoria_id);
-        }
-    
-        // Filtro por precio exacto
-        if ($request->filled('precio')) {
-            $query->where('precio', $request->precio);
-        }
-    
-        // Filtro por rango de precio
-        if ($request->filled('precio_min')) {
-            $query->where('precio', '>=', $request->precio_min);
-        }
-    
-        if ($request->filled('precio_max')) {
-            $query->where('precio', '<=', $request->precio_max);
-        }
-    
-        return $query->paginate(10);
-    }
-    
+        try {
+            $query = Pieza::with(['categoria', 'imagenes']); // Carga relaciones necesarias
 
+            // Filtros (mejorados con operador ternario)
+            $request->filled('nombre') && $query->where('nombre', 'like', '%'.$request->nombre.'%');
+            $request->filled('categoria_id') && $query->where('categoria_id', $request->categoria_id);
+            $request->filled('precio') && $query->where('precio', $request->precio);
+            $request->filled('precio_min') && $query->where('precio', '>=', $request->precio_min);
+            $request->filled('precio_max') && $query->where('precio', '<=', $request->precio_max);
+
+            // Paginación con valores por defecto seguros
+            $perPage = min($request->get('per_page', 10), 100); // Límite máximo de 100 items
+
+            return $query->orderByDesc('created_at')->paginate($perPage);
+
+        } catch (\Exception $e) {
+            Log::error('Error en PiezaController@index: '.$e->getMessage());
+            return response()->json(['error' => 'Error al obtener piezas'], 500);
+        }
+    }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
-            'precio' => 'required|numeric|min:0',
+            'precio' => 'required|numeric|min:0|max:999999.99',
             'categoria_id' => 'required|exists:categorias,id',
         ]);
 
-        $pieza = Pieza::create($validated);
+        try {
+            $pieza = Pieza::create($validated);
+            return response()->json([
+                'message' => 'Pieza creada exitosamente',
+                'data' => $pieza->load('categoria')
+            ], 201);
 
-        return response()->json($pieza, 201);
+        } catch (\Exception $e) {
+            Log::error('Error al crear pieza: '.$e->getMessage());
+            return response()->json(['error' => 'Error al crear pieza'], 500);
+        }
     }
-
     public function show(Pieza $pieza)
     {
         return $pieza->load('categoria');

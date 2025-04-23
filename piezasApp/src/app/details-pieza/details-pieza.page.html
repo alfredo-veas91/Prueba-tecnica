@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/piezas" color="light"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title class="text-light">Detalle del Producto</ion-title>
+    
+    @if (product) {
+      <ion-buttons slot="end">
+        <!-- Botón Editar - Versión CORRECTA -->
+        <ion-button (click)="editProduct()" fill="clear" class="custom-icon-btn">
+          <img src="assets/icon/iconsPiezas/edit.svg" alt="Editar" class="custom-icon">
+        </ion-button>
+        
+        <!-- Botón Eliminar - Versión CORRECTA -->
+        <ion-button (click)="deleteProduct()" fill="clear" class="custom-icon-btn">
+          <img src="assets/icon/iconsPiezas/trash-2.svg" alt="Eliminar" class="custom-icon">
+        </ion-button>
+      </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<!-- details-pieza.page.html -->
+<ion-content>
+  @if (product) {
+    <!-- Mostrar imagen si existe -->
+    <div class="image-section">
+      @if (product.imagenes?.length > 0) {
+        <img [src]="getImageUrl(product.imagenes[0].url)"
+             [alt]="product.nombre"
+             class="product-image"
+        >
+      } @else {
+        <div class="no-image">
+          <ion-icon name="image-outline"></ion-icon>
+          <p>No hay imagen disponible</p>
+        </div>
+      }
+    </div>
+
+    <!--Detalles del producto -->
+    <ion-list>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        {{ product.nombre }}
+      </ion-item>
+      <ion-item>
+        <ion-label>Precio</ion-label>
+        ${{ product.precio | number }}
+      </ion-item>
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        {{ product.categoria.nombre }}
+      </ion-item>
+      <ion-item>
+        <ion-label>Descripción</ion-label>
+        {{ product.descripcion }}
+      </ion-item>
+    </ion-list>
+  } @else if (isLoading) {
+    <ion-spinner></ion-spinner>
+  }
+  <!--Modal de eliminacion-->
+  <div *ngIf="showDeleteModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl p-6 w-full max-w-md relative">
+      <!-- Botón para cerrar -->
+      <button 
+        (click)="cancelDelete()"
+        class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        aria-label="Cerrar"
+        [disabled]="isDeleting"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <div class="text-center">
+        <!-- Título -->
+        <h6 class="text-xl font-bold mb-4 text-black">Eliminar Producto</h6>
+        
+        <!-- Mensaje -->
+        <p class="mb-8 text-gray-600">
+          ¿Estás seguro que deseas eliminar "{{product?.nombre}}"?
+          <span class="block text-sm text-red-500 mt-2">Esta acción no se puede deshacer</span>
+        </p>
+        
+        <div class="flex justify-center gap-4">
+          <!-- Botón Cancelar -->
+          <button 
+            (click)="cancelDelete()"
+            [disabled]="isDeleting"
+            class="px-8 py-3 text-gray-700 hover:text-gray-900 border border-gray-300 rounded hover:bg-gray-50 transition-colors duration-200 text-base font-medium"
+          >
+            Cancelar
+          </button>
+          
+          <!-- Botón Eliminar -->
+          <button 
+            (click)="confirmDelete()"
+            [disabled]="isDeleting"
+            class="px-8 py-3 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200 text-base font-medium flex items-center justify-center min-w-32"
+          >
+            <span *ngIf="!isDeleting">Sí, Eliminar</span>
+            <span *ngIf="isDeleting" class="flex items-center">
+              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Eliminando...
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

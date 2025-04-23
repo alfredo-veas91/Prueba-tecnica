@@ -1,0 +1,22 @@
+.custom-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --ripple-color: rgba(255, 255, 255, 0.1);
+    margin: 0 2px;
+    
+    /* Elimina el estilo por defecto de Ionic */
+    --background-hover: transparent;
+    --background-activated: transparent;
+  }
+
+  .icon-image {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1); /* Convierte el icono a blanco */
+    transition: transform 0.2s ease;
+    
+    &:active {
+      transform: scale(0.9); /* Efecto al presionar */
+    }
+  }
+  

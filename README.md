@@ -27,3 +27,7 @@ mi-repo/
 2. `npm install`
 3. Configurar `environment.ts` con la URL de la API
 4. `ionic serve`
+
+## Ejecucion del proyecto en localhost
+1. Levantar servidor de laravel `php artisan serve`
+2. En una terminal aparte, levantar servidor de ionic `ionic serve`

@@ -1,0 +1,82 @@
+<ion-content [fullscreen]="true" class="bg-white">
+  <ion-header>
+    <ion-toolbar class="bg-white text-black">
+      <div class="flex items-center justify-between px-4 w-full">
+        <!-- Botón menú -->
+        <ion-buttons slot="start" class="min-w-[24px]">
+          <button (click)="toggleMenu()" class="text-black">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </ion-buttons>
+        
+        <!-- Título centrado -->
+        <ion-title class="text-black text-xl font-inter text-gray-900 flex-grow text-center">Productos</ion-title>
+        
+        <!-- Botón agregar -->
+        <ion-buttons slot="end" class="min-w-[24px]">
+          <button (click)="navigateToCreatePieza()" class="text-black">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+          </button>
+        </ion-buttons>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  
+
+  <div class="px-4 py-6">
+    <!-- Buscador -->
+    <div class="relative w-full mb-6">
+      <input 
+        type="text" 
+        class="block w-full rounded-full border !border-[#AF48FF] !text-black py-2 pl-10 pr-4" 
+        placeholder="Busqueda"
+      >    
+      <svg 
+        class="absolute left-3 top-1/2 transform -translate-y-1/2 scale-x-[-1] h-5 w-5 text-[#AF48FF]" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+    </div>
+
+    <!-- Listado de productos -->
+    <div class="mb-4">
+      <h6 class="text-xs font-extrabold !font-medium text-gray-900 mb-3">Productos destacados</h6>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div *ngFor="let pieza of piezas" class="bg-white rounded-lg shadow overflow-hidden">
+          <div *ngIf="pieza.imagenes?.length > 0" class="h-40 bg-gray-100">
+            <img 
+              [src]="getImageUrl(pieza.imagenes[0].url)" 
+              alt="{{ pieza.nombre }}"
+              class="w-full h-full object-cover"
+              (click)="viewProductDetail(pieza.id)"
+            >
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-gray-800">{{ pieza.nombre }}</h3>
+            <p class="text-sm text-gray-600">${{ pieza.precio | number }}</p>
+            <p class="text-xs text-gray-500">{{ pieza.categoria?.nombre }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="text-center py-4 text-gray-500">Cargando...</div>
+    </div>
+
+    <!-- Scroll infinito -->
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)" *ngIf="!isLastPage">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <app-side-menu></app-side-menu>
+</ion-content>

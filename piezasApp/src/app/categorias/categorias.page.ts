@@ -55,7 +55,7 @@ export class CategoriasPage implements OnInit {
     this.apiService.getCategories().subscribe({
       next: (data) => {
         this.categories = data.data;
-        this.filteredCategories = [...this.categories]; // Inicializa con todas las categorías
+        this.filteredCategories = [...this.categories]; 
         console.log('Datos recibidos:', data);
       },
       error: (err) => console.error('Error loading categories', err)

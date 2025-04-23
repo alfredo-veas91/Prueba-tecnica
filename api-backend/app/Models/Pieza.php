@@ -20,4 +20,9 @@ class Pieza extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
+    public function imagenes()
+{
+    return $this->hasMany(PiezaImagen::class);
+}
+
 }

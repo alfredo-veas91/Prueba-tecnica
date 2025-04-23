@@ -1,14 +1,13 @@
-<!-- Contenedor principal con fondo y centrado -->
 <div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#2D2A70] via-[#803683] to-[#C23F86] p-4 relative">
-  
-  <div class="relative w-full max-w-md flex flex-col items-center">
+  <div class="relative w-full max-w-md flex flex-col items-center space-y-4">
 
-    <!-- Header-->
-    <header class="absolute -top-10 w-full7 flex justify-center z-10">
-      <img src="assets/icon/Group 1.svg" alt="Neering" class="w-24 h-auto md:w-126" />
+    <!-- Header (ya no es absolute) -->
+    <header class="w-full flex justify-center z-20">
+      <img src="assets/icon/Group 1.svg" alt="Neering" class="w-30 h-auto md:w-32" />
     </header>
+    
 
-    <!-- Contenedor blanco-->
+    <!-- Contenedor blanco -->
     <div class="bg-white p-8 rounded-2xl shadow-md w-full z-0">
       <h1 class="text-3xl !font-extrabold !font-inter mb-6 text-center text-gray-900">Login</h1>
 
@@ -59,7 +58,6 @@
           Log In
         </button>
 
-
         <div class="my-4 text-gray-400 text-sm text-center">o</div>
 
         <button
@@ -67,11 +65,10 @@
           <img src="assets/icon/google.svg" alt="Google" class="w-5 h-5 mr-2" />
           <span class="text-sm font-medium text-gray-700">Continuar con Google</span>
         </button>
-
       </form>
     </div>
 
-    <!-- Footer-->
+    <!-- Footer (sin cambios) -->
     <footer class="absolute -bottom-10 w-full flex justify-center z-10">
       <img src="assets/icon/Capa_1.svg" alt="Neering" class="w-30 h-auto md:w-32" />
     </footer>

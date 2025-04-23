@@ -100,7 +100,7 @@ class="fixed left-0 top-0 z-30 h-full w-64 bg-white shadow-lg transform transiti
     <ul>
       <li>
         <a 
-          href="#" 
+          href="/piezas" 
           class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded"
           routerLinkActive="bg-gray-100 font-medium"
         >
@@ -136,6 +136,17 @@ class="fixed left-0 top-0 z-30 h-full w-64 bg-white shadow-lg transform transiti
         >
         <img src="assets/icon/menuIcons/Help.svg" alt="Tiendas" class="w-5 h-5 mr-3 text-gray-500">
           Ayuda
+        </a>            
+      </li>      
+      <li>
+        <a 
+          (click)="logout()"
+          class="flex items-center px-4 py-2 !text-gray-700 hover:bg-gray-100 rounded cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Cerrar sesión
         </a>            
       </li>
     </ul>

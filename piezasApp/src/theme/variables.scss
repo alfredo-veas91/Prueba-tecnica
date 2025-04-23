@@ -1,2 +1,21 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+body {
+    --ion-background-color: #ffffff !important;
+    --ion-text-color: #000000 !important;
+  }
+  
+  // Desactiva modo oscuro
+@media (prefers-color-scheme: dark) {
+    :root {
+      --ion-color-step-50: #f2f2f2;
+      --ion-color-step-100: #e6e6e6;
+      --ion-background-color: #ffffff !important;
+      --ion-text-color: #000000 !important;
+      --ion-toolbar-background: #ffffff !important;
+      --ion-toolbar-color: #000000 !important;
+      --ion-item-background: #ffffff !important;
+      --ion-card-background: #ffffff !important;
+    }
+  }
+  

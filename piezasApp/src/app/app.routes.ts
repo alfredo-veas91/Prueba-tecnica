@@ -34,4 +34,20 @@ export const routes: Routes = [
     path: 'update-categoria/:id',
     loadComponent: () => import('./update-categoria/update-categoria.page').then( m => m.UpdateCategoriaPage)
   },
+  {
+    path: 'piezas',
+    loadComponent: () => import('./piezas/piezas.page').then( m => m.PiezasPage)
+  },
+  {
+    path: 'create-pieza',
+    loadComponent: () => import('./create-pieza/create-pieza.page').then( m => m.CreatePiezaPage)
+  },
+  {
+    path: 'details-pieza/:id',
+    loadComponent: () => import('./details-pieza/details-pieza.page').then( m => m.DetailsPiezaPage)
+  },
+  {
+    path: 'edit-pieza/:id',
+    loadComponent: () => import('./edit-pieza/edit-pieza.page').then( m => m.EditPiezaPage)
+  },
 ];
